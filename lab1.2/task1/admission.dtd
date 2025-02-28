@@ -1,0 +1,7 @@
+<!ELEMENT admission (student+)>
+<!ELEMENT student (firstName, lastName, middleName, previousInstitution, faculty)>
+<!ELEMENT firstName (#PCDATA)>
+<!ELEMENT lastName (#PCDATA)>
+<!ELEMENT middleName (#PCDATA)>
+<!ELEMENT previousInstitution (#PCDATA)>
+<!ELEMENT faculty (#PCDATA)>
