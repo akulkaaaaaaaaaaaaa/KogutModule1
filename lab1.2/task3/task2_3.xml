@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE admission SYSTEM "task2_3.dtd">
+<?xml-stylesheet type="text/css" href="task2_3.css"?>
+<admission>
+    <student>
+        <firstName>Каміла</firstName>
+        <lastName>Когут</lastName>
+        <middleName>Вікторівна</middleName>
+        <previousInstitution>Київський авіаційний інститут</previousInstitution>
+        <faculty>Факультет Комп'ютерних Наук та технологій</faculty>
+    </student>
+</admission>
