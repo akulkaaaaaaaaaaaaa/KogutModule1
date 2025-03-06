@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анкета для вступу до університету</title>
+    <style>
+        /* Загальні стилі */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3a3a3a;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* Контейнер форми */
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom right, #ffffff, #f7f9fc);
+        }
+
+        /* Стиль для міток та полів введення */
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+        }
+
+        button {
+            background-color: #6c63ff;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background-color: #5a50e1;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Кнопки для експорту та видалення записів */
+        .action-buttons button {
+            background-color: #3b82f6;
+            margin-right: 10px;
+        }
+
+        .action-buttons button:hover {
+            background-color: #2563eb;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Стиль таблиці */
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        th {
+            background-color: #6c63ff;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7f7f7;
+        }
+
+        tr:hover {
+            background-color: #f0f4f8;
+        }
+
+        /* Заголовок записів */
+        #recordsTable h2 {
+            text-align: center;
+            color: #6c63ff;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        /* Стиль для піших посилань */
+        .form-container p {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .form-container p a {
+            color: #6c63ff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .form-container p a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Форма для введення даних -->
+    <div class="form-container">
+        <h1>Анкета для вступу</h1>
+        <form id="admissionForm">
+            <label for="firstName">Ім'я:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Прізвище:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="patronymic">По батькові:</label>
+            <input type="text" id="patronymic" name="patronymic" required>
+
+            <label for="previousStudy">Попереднє місце навчання:</label>
+            <input type="text" id="previousStudy" name="previousStudy" required>
+
+            <label for="faculty">Виберіть факультет:</label>
+            <select id="faculty" name="faculty" required>
+                <option value="informatics">Інформатика</option>
+                <option value="engineering">Інженерія</option>
+                <option value="economics">Економіка</option>
+                <option value="law">Правознавство</option>
+            </select>
+
+            <button type="button" onclick="submitForm()">Надіслати</button>
+        </form>
+
+        <!-- Кнопки для дій -->
+        <div class="action-buttons">
+            <button type="button" onclick="exportToJSON()">Експортувати у JSON</button>
+            <button type="button" onclick="exportToXML()">Експортувати у XML</button>
+            <button type="button" onclick="deleteRecords()">Видалити всі записи</button>
+        </div>
+    </div>
+
+    <!-- Таблиця для записів -->
+    <div id="recordsTable">
+        <h2>Записи</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ім'я</th>
+                    <th>Прізвище</th>
+                    <th>По батькові</th>
+                    <th>Попереднє місце навчання</th>
+                    <th>Факультет</th>
+                </tr>
+            </thead>
+            <tbody id="recordsBody">
+                <!-- Записи будуть додаватися тут -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let records = [];
+
+        // Функція для відправлення форми
+        function submitForm() {
+            let form = document.getElementById('admissionForm');
+            let firstName = form['firstName'].value;
+            let lastName = form['lastName'].value;
+            let patronymic = form['patronymic'].value;
+            let previousStudy = form['previousStudy'].value;
+            let faculty = form['faculty'].value;
+
+            let formData = {
+                firstName: firstName,
+                lastName: lastName,
+                patronymic: patronymic,
+                previousStudy: previousStudy,
+                faculty: faculty
+            };
+
+            records.push(formData);
+            form.reset();
+            updateTable();
+            localStorage.setItem('admissionRecords', JSON.stringify(records));
+        }
+
+        window.onload = function() {
+            let storedRecords = localStorage.getItem('admissionRecords');
+            if (storedRecords) {
+                records = JSON.parse(storedRecords);
+                updateTable();
+            }
+        };
+
+        // Функція для оновлення таблиці
+        function updateTable() {
+            let recordsBody = document.getElementById('recordsBody');
+            recordsBody.innerHTML = '';
+
+            records.forEach(function(record) {
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.firstName}</td>
+                    <td>${record.lastName}</td>
+                    <td>${record.patronymic}</td>
+                    <td>${record.previousStudy}</td>
+                    <td>${record.faculty}</td>
+                `;
+                recordsBody.appendChild(row);
+            });
+        }
+
+        // Функція для експорту у формат JSON
+        function exportToJSON() {
+            let json = JSON.stringify(records);
+            let blob = new Blob([json], { type: 'application/json' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'form_data.json';
+            a.click();
+        }
+
+        // Функція для експорту у формат XML
+        function exportToXML() {
+            let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<records>';
+            records.forEach(function(record) {
+                xml += `<record>
+                            <firstName>${record.firstName}</firstName>
+                            <lastName>${record.lastName}</lastName>
+                            <patronymic>${record.patronymic}</patronymic>
+                            <previousStudy>${record.previousStudy}</previousStudy>
+                            <faculty>${record.faculty}</faculty>
+                        </record>`;
+            });
+            xml += '</records>';
+
+            let blob = new Blob([xml], { type: 'application/xml' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'form_data.xml';
+            a.click();
+        }
+
+        // Функція для видалення всіх записів
+        function deleteRecords() {
+            records = [];
+            localStorage.removeItem('admissionRecords');
+            alert("Усі записи були видалені.");
+            updateTable();
+        }
+    </script>
+
+</body>
+</html>
