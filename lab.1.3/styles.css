@@ -1,0 +1,58 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.center {
+    text-align: center;
+    margin: auto;
+}
+
+#keyboard {
+    text-align: center;
+    margin: auto;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Кнопки вибору діапазону */
+input[value="0-10"] { background-color: #bfd981; }
+input[value="0-25"] { background-color: #d6f5d6; }
+input[value="0-50"] { background-color: #9570d0; }
+input[value="0-100"] { background-color: #b59051; }
+
+/* Кнопки операцій */
+input[value="+"] { background-color: #ccffcc; }
+input[value="-"] { background-color: #ffcccc; }
+input[value="*"] { background-color: #ffe6ff; }
+
+/* Кнопки чисел */
+#keyboard input[type="button"] {
+    background-color: #b0c4de;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #6a8caf;
+    border-radius: 6px;
+}
+
+#keyboard input[type="button"]:hover {
+    background-color: #8fa1c1;
+}
+
+/* Кнопка генерації виразу */
+input[value="?"] {
+    background-color: #ffcc66;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #e6b800;
+    border-radius: 6px;
+}
+
+/* Кнопка перевірки */
+input[value="OK"] {
+    background-color: #6699cc;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #336699;
+    border-radius: 6px;
+}
